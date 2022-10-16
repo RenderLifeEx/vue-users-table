@@ -1,26 +1,32 @@
-# vue-test-app
+# Таблица пользователей на VueJS v3 (TypeScript) + Pinia
 
 ## Project setup
+
 ```
-npm install
+npm i -g @vue/cli
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
+
 ```
-npm run build
+yarn build
 ```
 
 ### Lints and fixes files
+
 ```
-npm run lint
+yarn lint
 ```
 
 ### Условия задачи
+
 ```
 Задача: ​Написать web-приложение, используя VueJS v3 (TypeScript) + Pinia + тесты на утилитарные функции
 
@@ -68,3 +74,4 @@ https://gist.githubusercontent.com/bunopus/f48fbb06578003fb521c7c1a54fd906a/raw/
     возможную ширину.
 
 
+```
