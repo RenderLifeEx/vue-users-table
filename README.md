@@ -75,3 +75,11 @@ https://gist.githubusercontent.com/bunopus/f48fbb06578003fb521c7c1a54fd906a/raw/
 
 
 ```
+
+### В разработке использовалось
+
+```
+vue create vue-3-pinia-grocery-app
+vue add typescript
+- Use class-style component syntax? No
+```
