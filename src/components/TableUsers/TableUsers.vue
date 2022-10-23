@@ -38,70 +38,13 @@
 
 <script setup>
 import { defineProps } from 'vue';
-//import { User } from "@/models/user.model";
 
-const props = defineProps({
+defineProps({
   myUsers: { type: Array, required: true },
   myDate: { type: String, required: true }
 })
 
-console.log('props', props)
-
-// export default defineComponent({
-//   name: 'TableUsers',
-//   props: {
-//     myUsers: {
-//       type: Array,
-//       default() {
-//         return []
-//       }
-//     },
-//     myDate: {
-//       type: String,
-//       default() {
-//         return 'No date'
-//       }
-//     },
-//   }
-// })
-
-// import { defineProps } from 'vue';
-// import { User } from "@/models/user.model";
-
-// const props = defineProps<{
-//   myDate: string,
-//   myUsers: User[]
-// }>()
-
-// const props = defineProps({
-//   props: {
-//     date: {
-//       type: String,
-//       default: "No date"
-//     },
-//     myUsers: {
-//       type: String,
-//       default: "No users"
-//     }
-//   }
-// })
-
 </script>
-
-<!--
-<script>
-export default {
-  props: {
-    date: {
-      type: String,
-      default: "No title"
-    },
-    users: {
-      default: []
-    }
-  }
-}
-</script> -->
 
 <style scoped lang="scss">
     @import './styles.scss';
