@@ -9,13 +9,11 @@ export const useUserStore = defineStore("user", {
     state: () => ({
         users: [],
     }  as RootState),
-
     getters: {
         getUsers(state) {
             return state.users
         }
     },
-
     actions: {
       async fetchUsers() {
         try {

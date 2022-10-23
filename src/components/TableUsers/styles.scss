@@ -1,0 +1,224 @@
+$bp-x-small: 15em;
+$bp-small: 30em;
+$bp-medium: 48em;
+$bp-large: 62em;
+$bp-x-large: 75em;
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+a {
+  color: #17c788;
+
+  &:hover,
+  &:focus {
+    color: #1c670a;
+  }
+}
+
+.container {
+  margin: 5% 3%;
+
+  @media (min-width: $bp-medium) {
+    margin: 2%;
+  }
+
+  @media (min-width: $bp-x-large) {
+    margin: 2em auto;
+    max-width: $bp-x-large;
+  }
+}
+
+.responsive-table {
+  width: 100%;
+  margin-bottom: 1.5em;
+  border-spacing: 0;
+  border: 1px solid #e2e9ee;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border-radius: 16px;
+
+  @media (min-width: $bp-medium) {
+    font-size: 0.9em;
+  }
+
+  @media (min-width: $bp-large) {
+    font-size: 1em;
+  }
+
+  thead {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+
+    @media (min-width: $bp-medium) {
+      position: relative;
+      clip: auto;
+      height: auto;
+      width: auto;
+      overflow: auto;
+    }
+
+    th {
+      background-color: #17c788;
+      font-weight: normal;
+      text-align: center;
+      color: white;
+
+      &:first-of-type {
+        text-align: left;
+      }
+    }
+  }
+
+  // Set these items to display: block for narrow viewports
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+  }
+
+  tr {
+    @media (min-width: $bp-medium) {
+      // Undo display: block
+      display: table-row;
+    }
+  }
+
+  th,
+  td {
+    padding: 0.5em;
+    vertical-align: middle;
+
+    @media (min-width: $bp-small) {
+      padding: 0.75em 0.5em;
+    }
+
+    @media (min-width: $bp-medium) {
+      // Undo display: block
+      display: table-cell;
+      padding: 0.5em;
+    }
+
+    @media (min-width: $bp-large) {
+      padding: 0.75em 0.5em;
+    }
+
+    @media (min-width: $bp-x-large) {
+      padding: 0.75em;
+    }
+  }
+
+  caption {
+    margin-bottom: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+
+    @media (min-width: $bp-medium) {
+      font-size: 1.5em;
+    }
+  }
+
+  tfoot {
+    font-size: 0.8em;
+    font-style: italic;
+
+    @media (min-width: $bp-large) {
+      font-size: 0.9em;
+    }
+  }
+
+  tbody {
+    @media (min-width: $bp-medium) {
+      // Undo display: block
+      display: table-row-group;
+    }
+
+    tr {
+      margin-bottom: 1em;
+
+      @media (min-width: $bp-medium) {
+        // Undo display: block
+        display: table-row;
+        border-width: 1px;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      &:nth-of-type(even) {
+        @media (min-width: $bp-medium) {
+          background-color: #F3F7FA;
+        }
+      }
+    }
+
+    th[scope="row"] {
+      background-color: #17c788;
+      color: white;
+      border-bottom: 1px solid #E2E9EE;
+
+      @media (min-width: $bp-medium) {
+        background-color: transparent;
+        color: rgba(0, 0, 0.87);
+        text-align: left;
+        border-bottom: none;
+      }
+    }
+
+    td {
+      text-align: right;
+      border-bottom: 1px solid #E2E9EE;
+
+      @media (min-width: $bp-medium) {
+        text-align: center;
+        border-bottom: none;
+      }
+
+      &:last-of-type {
+        @media (min-width: $bp-medium) {}
+      }
+    }
+
+    td[data-type="currency"] {
+      text-align: right;
+    }
+
+    td[data-title]:before {
+      content: attr(data-title);
+      float: left;
+      font-size: 0.8em;
+      color: rgba(0, 0, 0, 0.54);
+
+      @media (min-width: $bp-small) {
+        font-size: 0.9em;
+      }
+
+      @media (min-width: $bp-medium) {
+        // Don’t show data-title labels
+        content: none;
+      }
+    }
+  }
+}

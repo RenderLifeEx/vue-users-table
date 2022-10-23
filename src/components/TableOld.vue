@@ -236,6 +236,52 @@ export default {
 };
 </script>
 
+
+<script>
+// export default {
+//   name: 'UsersSortedTable',
+//   data: function (){
+//     return {
+//       orderFilterClass: 'table__td',
+//       orderFilterAddressClass: 'table__td_address'
+//     };
+//   },
+//   methods: {
+//     changeOrder: function (orderKey) {
+//       this.changeUsersListOrder(orderKey);
+//     },
+//     filterList: function (filter) {
+//       this.filterUsersList(filter);
+//     }
+//   },
+//   computed: {
+//     users() {
+//       return this.$store.getters.getUsersForSortTable;
+//     },
+//     orderKey() {
+//       return this.$store.getters.getUsersOrderKey;
+//     },
+//     orderDirection() {
+//       return this.$store.getters.getUsersOrderDirection;
+//     },
+//     genderFilters() {
+//       return this.$store.getters.getUsersFiltersGender;
+//     },
+//     departmentFilters() {
+//       return this.$store.getters.getUsersFiltersDepartment;
+//     },
+//     cityFilters() {
+//       return this.$store.getters.getUsersFiltersCity;
+//     },
+//   },
+//   beforeCreate() {
+//     if( !this.$store.getters.getUsersForSortTable.length ) {
+//       this.$store.dispatch('loadUsers');
+//     }
+//   }
+// };
+</script>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
