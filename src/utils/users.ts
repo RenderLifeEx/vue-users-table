@@ -1,28 +1,29 @@
 import { User, Address } from "@/models/user.model";
-import { FiltersList, ActiveFiltersValues, FilterType } from "@/models/filter.model";
+import { ActiveFiltersValues, FilterType } from "@/models/filter.model";
 
-export function filterUsersList(user: User, filterParam: any) {
+export function filterUsersList(user: User, filterParam: ActiveFiltersValues) {
     const resultArr = <Boolean[]>[]
-    const filterParamKeys = Object.keys(filterParam)
+    type PropsKeys = keyof ActiveFiltersValues;
+    const filterParamKeys = Object.keys(filterParam) as PropsKeys[]
 
     if (filterParamKeys.every(key => !filterParam[key].length)) {
         return true
     }
 
-    filterParamKeys.forEach((key: any) => {
-        const filterKey = key as keyof User & keyof Address
+    filterParamKeys.forEach((key: PropsKeys) => {
+        const columnKey = key as keyof User & keyof Address
 
-        if (filterParam[filterKey].length > 0) {
-            if (filterKey === FilterType.USERS_FILTERS_GENDER_KEY) {
-                resultArr.push(user[filterKey] === filterParam[filterKey][0])
+        if (filterParam[key].length > 0) {
+            if (columnKey === FilterType.USERS_FILTERS_GENDER_KEY) {
+                resultArr.push(user[columnKey] === filterParam[key][0])
             }
 
-            if (filterKey === FilterType.USERS_FILTERS_DEPARTMENT_KEY) {
-                resultArr.push(filterParam[filterKey].includes(user[filterKey]))
+            if (columnKey === FilterType.USERS_FILTERS_DEPARTMENT_KEY) {
+                resultArr.push(filterParam[key].includes(user[columnKey]))
             }
 
-            if (filterKey === FilterType.USERS_FILTERS_CITY_KEY) {
-                resultArr.push(filterParam[filterKey].includes(user.address[filterKey]))
+            if (columnKey === FilterType.USERS_FILTERS_CITY_KEY) {
+                resultArr.push(filterParam[key].includes(user.address[columnKey]))
             }
         }
     })

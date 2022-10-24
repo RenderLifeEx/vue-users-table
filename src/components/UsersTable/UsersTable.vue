@@ -39,15 +39,12 @@
 <script setup lang="ts">
   import { onMounted, computed } from 'vue';
   import { useUserStore } from "@/stores/users";
-  import { usePostStore } from "@/stores/posts";
   import Filters from '@/components/UsersFilters/UsersFilters.vue'
 
   const userStore = useUserStore();
-  const postStore = usePostStore();
 
   onMounted(() => {
     userStore.fetchUsers();
-    postStore.fetchPosts();
   })
 
   const users = computed(() => {
