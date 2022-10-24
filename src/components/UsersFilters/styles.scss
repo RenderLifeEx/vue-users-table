@@ -1,0 +1,61 @@
+@import '@/assets/commonStyles.scss';
+
+$mobile-width : 899px;
+
+.filterGroups {
+  margin-top: 0
+}
+
+.filterGroups {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  justify-content: start;
+  margin-bottom: 15px;
+  @media (max-width:$mobile-width) {
+    flex-wrap: wrap;
+  }
+}
+
+.filterItem {
+  display: block;
+  width: 33.3%;
+  border: 1px solid #E2E9EE;
+  overflow: hidden;
+  border-radius: 12px;
+  word-break: break-word;
+  &:not(:last-child) {
+    @media (max-width:$mobile-width) {
+      margin-bottom: 15px;
+    }
+  }
+  &:not(:first-child) {
+    margin-left: 15px;
+    @media (max-width:$mobile-width) {
+      margin-left: 0;
+    }
+  }
+  @media (max-width:$mobile-width) {
+    width: 100%;
+  }
+}
+
+.filterItem__list {
+  padding: 10px;
+}
+
+.filterItem__title {
+  padding: 5px;
+  font-weight: bold;
+  border-bottom: 1px solid #E2E9EE;
+  background: #f3f7fa;
+}
+
+.filterItem__option {
+  display: block;
+  text-align: left;
+  cursor: pointer;
+  &__name_disabled {
+    color: #d1d1d1;
+  }
+}

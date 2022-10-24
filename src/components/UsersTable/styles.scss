@@ -1,31 +1,4 @@
-$bp-x-small: 15em;
-$bp-small: 30em;
-$bp-medium: 48em;
-$bp-large: 62em;
-$bp-x-large: 75em;
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  color: rgba(0, 0, 0, 0.87);
-}
-
-a {
-  color: #17c788;
-
-  &:hover,
-  &:focus {
-    color: #1c670a;
-  }
-}
+@import '@/assets/commonStyles.scss';
 
 .container {
   margin: 5% 3%;
@@ -47,7 +20,7 @@ a {
   border: 1px solid #e2e9ee;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 8px;
 
   @media (min-width: $bp-medium) {
     font-size: 0.9em;
@@ -125,17 +98,6 @@ a {
 
     @media (min-width: $bp-x-large) {
       padding: 0.75em;
-    }
-  }
-
-  caption {
-    margin-bottom: 1em;
-    font-size: 1em;
-    font-weight: bold;
-    text-align: center;
-
-    @media (min-width: $bp-medium) {
-      font-size: 1.5em;
     }
   }
 
@@ -221,4 +183,17 @@ a {
       }
     }
   }
+}
+
+.errorContainer {
+  width: 100%;
+  margin-bottom: 1.5em;
+  border-spacing: 0;
+  border: 1px solid #FFF6EF;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border-radius: 8px;
+  background: #FFF6EF;
+  color: #F78A2B;
+  padding: 15px
 }

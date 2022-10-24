@@ -1,0 +1,48 @@
+$bp-x-small: 15em;
+$bp-small: 30em;
+$bp-medium: 48em;
+$bp-large: 62em;
+$bp-x-large: 75em;
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+a {
+  color: #17c788;
+
+  &:hover,
+  &:focus {
+    color: #1c670a;
+  }
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 40px;
+}
+
+.titleApp {
+  margin-bottom: 1em;
+  font-size: 1.3em;
+  font-weight: bold;
+  text-align: center;
+
+  @media (min-width: $bp-medium) {
+    font-size: 2em;
+  }
+}
