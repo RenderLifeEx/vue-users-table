@@ -55,6 +55,7 @@ $mobile-width : 899px;
   display: block;
   text-align: left;
   cursor: pointer;
+  user-select: none;
   &__name_disabled {
     color: #d1d1d1;
   }

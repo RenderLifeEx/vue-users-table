@@ -2,19 +2,24 @@ import { User } from "@/models/user.model";
 import { FiltersList, ActiveFiltersValues } from "@/models/filter.model";
 import { defineStore } from "pinia";
 import API from '@/services/API'
-import { FilterType } from "@/models/filter.model";
+import { FilterType, Option } from "@/models/filter.model";
 
 import { filterUsersList } from '@/utils/users'
 import { filterOptionsFromFilteredData } from '@/utils/filters'
 
 export type RootState = {
+    isLoading: boolean
     users: User[]
     usersListFilters: FiltersList
     getSortedAndFilteredUsers: User[]
+    getUsersFiltersGenderOptions: Option[]
+    getUsersFiltersDepartmentOptions: Option[]
+    getUsersFiltersCityOptions: Option[]
 };
 
 export const useUserStore = defineStore("user", {
     state: () => (<RootState>{
+        isLoading: false,
         users: [],
         usersListFilters : {
             activeFiltersValuesList: {
@@ -23,7 +28,10 @@ export const useUserStore = defineStore("user", {
                 city: []
             },
         },
-        getSortedAndFilteredUsers: []
+        getSortedAndFilteredUsers: [],
+        getUsersFiltersGenderOptions: [],
+        getUsersFiltersDepartmentOptions: [],
+        getUsersFiltersCityOptions: []
     }),
     getters: {
         getSortedAndFilteredUsers(state) {
@@ -48,6 +56,7 @@ export const useUserStore = defineStore("user", {
             try {
                 const data = await API.request('bunopus/f48fbb06578003fb521c7c1a54fd906a/raw/e5767c1e7f172c6375f064a9441f2edd57a79f15/test_users.json')
                 this.users = data.data
+                this.isLoading = true
             } catch (error) {
                 alert(error)
                 console.log(error)

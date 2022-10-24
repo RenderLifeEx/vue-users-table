@@ -2,16 +2,10 @@ export type FiltersList = {
     activeFiltersValuesList: ActiveFiltersValues
 }
 
-export type Filters = {
-    gender: Option[]
-    department: Option[]
-    city: Option[]
-}
-
 export type Option = {
     name: string
     usersCount: number
-    id: number
+    id: string
     isActive: boolean
     disabled: boolean
 }

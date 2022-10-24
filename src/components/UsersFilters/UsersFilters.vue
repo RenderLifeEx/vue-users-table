@@ -51,11 +51,10 @@
   </div>
 </template>
 
-<!-- <script setup lang="ts"> -->
-<script>
+<script lang="ts">
   import { computed } from 'vue'
   import { useUserStore } from "@/stores/users";
-  import { FilterType } from "@/models/filter.model";
+  import { FilterType, ActiveFiltersValues } from "@/models/filter.model";
 
   export default {
     setup () {
@@ -73,7 +72,7 @@
         return userStore.getUsersFiltersCityOptions
       })
 
-      const filterChange = (filterType, value) => {
+      const filterChange = (filterType: keyof ActiveFiltersValues, value: string) => {
         userStore.filterChange(filterType, value);
       }
 

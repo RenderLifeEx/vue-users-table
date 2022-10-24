@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Filters />
+    <Filters v-if="users?.length" />
     <div class="container" v-if="users?.length">
       <table class="responsive-table">
         <thead>
@@ -30,18 +30,22 @@
         </tbody>
       </table>
     </div>
-    <div v-else class="errorContainer">
-      Пользователей с заданными параметрами не найдено
+    <div v-else-if="!isLogging" class="infoContainer infoContainer_loading">
+      <span>Идет загрузка данных...</span>
+    </div>
+    <div v-else class="errorContainer infoContainer_error">
+      <span>Пользователей с заданными параметрами не найдено</span>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { onMounted, computed } from 'vue';
+  import { onMounted, computed, ref } from 'vue';
   import { useUserStore } from "@/stores/users";
   import Filters from '@/components/UsersFilters/UsersFilters.vue'
 
   const userStore = useUserStore();
+  const isLogging = ref(userStore.isLoading)
 
   onMounted(() => {
     userStore.fetchUsers();
