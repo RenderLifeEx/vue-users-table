@@ -1,5 +1,5 @@
 <template>
-  <h1 class="titleApp">Список пользователей</h1>
+  <h1 class="titleApp">List of users</h1>
   <TableUsers />
 </template>
 
