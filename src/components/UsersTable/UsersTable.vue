@@ -5,12 +5,15 @@
       <table class="responsive-table">
         <thead>
           <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Age</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Department</th>
-            <th scope="col">Address</th>
+            <template v-for="(head, index) in TableHeads" :key="index">
+              <UsersTableHead
+                :name="head.title"
+                :sortKey="head.key"
+                :sortType="sortType"
+                :sortDirection="sortDirection"
+                @handle-sort-click="handleSortClick"
+              />
+            </template>
           </tr>
         </thead>
         <tfoot>
@@ -31,10 +34,10 @@
       </table>
     </div>
     <div v-else-if="!isLogging" class="infoContainer infoContainer_loading">
-      <span>Идет загрузка данных...</span>
+      <span>Loading...</span>
     </div>
     <div v-else class="errorContainer infoContainer_error">
-      <span>Пользователей с заданными параметрами не найдено</span>
+      <span>No users matching the specified parameters was found</span>
     </div>
   </div>
 </template>
@@ -42,10 +45,13 @@
 <script setup lang="ts">
   import { onMounted, computed, ref } from 'vue';
   import { useUserStore } from "@/stores/users";
-  import Filters from '@/components/UsersFilters/UsersFilters.vue'
+  import Filters from '@/components/UsersFilters/UsersFilters.vue';
+  import UsersTableHead from '@/components/UsersTable/UsersTableHead.vue';
+  import { SortType } from "@/models/sort.model";
+  import { TableHeads } from '@/constants/constants';
 
   const userStore = useUserStore();
-  const isLogging = ref(userStore.isLoading)
+  const isLogging = ref(userStore.isLoading);
 
   onMounted(() => {
     userStore.fetchUsers();
@@ -54,6 +60,18 @@
   const users = computed(() => {
     return userStore.getSortedAndFilteredUsers;
   })
+
+  const sortType = computed(() => {
+    return userStore.activeSortValues.type;
+  })
+
+  const sortDirection = computed(() => {
+    return userStore.activeSortValues.direction;
+  })
+
+  const handleSortClick = (sortType: SortType | null) => {
+    userStore.doSortUser(sortType);
+  }
 </script>
 
 <style scoped lang="scss">

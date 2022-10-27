@@ -1,16 +1,19 @@
 import { User } from "@/models/user.model";
-import { FiltersList, ActiveFiltersValues } from "@/models/filter.model";
+import { ActiveFiltersValues } from "@/models/filter.model";
 import { defineStore } from "pinia";
 import API from '@/services/API'
 import { FilterType, Option } from "@/models/filter.model";
+import { SortType, ActiveSortValues, SortDirection } from "@/models/sort.model";
 
-import { filterUsersList } from '@/utils/users'
-import { filterOptionsFromFilteredData } from '@/utils/filters'
+import { filterUsersList } from '@/utils/users';
+import { filterOptionsFromFilteredData } from '@/utils/filters';
+import { getSortValues, sortedUsers } from '@/utils/sort';
 
 export type RootState = {
     isLoading: boolean
     users: User[]
-    usersListFilters: FiltersList
+    activeFiltersValues: ActiveFiltersValues
+    activeSortValues: ActiveSortValues
     getSortedAndFilteredUsers: User[]
     getUsersFiltersGenderOptions: Option[]
     getUsersFiltersDepartmentOptions: Option[]
@@ -21,12 +24,14 @@ export const useUserStore = defineStore("user", {
     state: () => (<RootState>{
         isLoading: false,
         users: [],
-        usersListFilters : {
-            activeFiltersValuesList: {
-                gender : [],
-                department : [],
-                city: []
-            },
+        activeFiltersValues: {
+            gender : [],
+            department : [],
+            city: []
+        },
+        activeSortValues: {
+            type: null,
+            direction: null
         },
         getSortedAndFilteredUsers: [],
         getUsersFiltersGenderOptions: [],
@@ -35,19 +40,21 @@ export const useUserStore = defineStore("user", {
     }),
     getters: {
         getSortedAndFilteredUsers(state) {
-            const filterParam = state.usersListFilters.activeFiltersValuesList
-            return state.users.filter(user => filterUsersList(user, filterParam))
+            const filterParam = state.activeFiltersValues
+            const sortParam = state.activeSortValues
+            const filteredUsers = state.users.filter(user => filterUsersList(user, filterParam))
+            return sortedUsers(filteredUsers, sortParam)
         },
         getUsersFiltersGenderOptions(state) {
-            const filterParam = state.usersListFilters.activeFiltersValuesList
+            const filterParam = state.activeFiltersValues
             return filterOptionsFromFilteredData(state.users, this.getSortedAndFilteredUsers, filterParam, FilterType.USERS_FILTERS_GENDER_KEY);
         },
         getUsersFiltersDepartmentOptions(state) {
-            const filterParam = state.usersListFilters.activeFiltersValuesList
+            const filterParam = state.activeFiltersValues
             return filterOptionsFromFilteredData(state.users, this.getSortedAndFilteredUsers, filterParam, FilterType.USERS_FILTERS_DEPARTMENT_KEY);
         },
         getUsersFiltersCityOptions(state) {
-            const filterParam = state.usersListFilters.activeFiltersValuesList
+            const filterParam = state.activeFiltersValues
             return filterOptionsFromFilteredData(state.users, this.getSortedAndFilteredUsers, filterParam, FilterType.USERS_FILTERS_CITY_KEY);
         }
     },
@@ -62,51 +69,18 @@ export const useUserStore = defineStore("user", {
                 console.log(error)
             }
         },
-        filterChange(filterType: keyof ActiveFiltersValues, value: string) {
-            const activeList = this.usersListFilters.activeFiltersValuesList[filterType]
+        doFilterUsers(filterType: FilterType, value: string) {
+            const activeList = this.activeFiltersValues[filterType]
             if (activeList.includes(value)) {
-                this.usersListFilters.activeFiltersValuesList[filterType] = activeList.filter(i => i !== value)
+                this.activeFiltersValues[filterType] = activeList.filter(i => i !== value)
             } else {
-                this.usersListFilters.activeFiltersValuesList[filterType].push(value)
+                this.activeFiltersValues[filterType].push(value)
             }
+        },
+        doSortUser(sortType: SortType | null) {
+            const { type, direction } = getSortValues(sortType, this.activeSortValues)
+            this.activeSortValues.type = type
+            this.activeSortValues.direction = direction
         }
     }
 })
-
-// export const useMainStore = defineStore({
-//     id: "mainStore",
-
-//     state: () => ({
-//         items: [],
-//     } as RootState),
-
-//     actions: {
-//         createNewItem(item: Item) {
-//             if (!item) return;
-
-//             this.items.push(item);
-//         },
-
-//         updateItem(id: string, payload: Item) {
-//             if (!id || !payload) return;
-
-//             const index = this.findIndexById(id);
-
-//             if (index !== -1) {
-//                 this.items[index] = generateFakeData();
-//             }
-//         },
-
-//         deleteItem(id: string) {
-//             const index = this.findIndexById(id);
-
-//             if (index === -1) return;
-
-//             this.items.splice(index, 1);
-//         },
-
-//         findIndexById(id: string) {
-//             return this.items.findIndex((item) => item.id === id);
-//         },
-//     },
-// });

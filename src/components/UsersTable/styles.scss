@@ -48,13 +48,95 @@
     }
 
     th {
-      background-color: #17c788;
+      background-color: $green-color;
       font-weight: normal;
       text-align: center;
       color: white;
 
       &:first-of-type {
         text-align: left;
+      }
+
+      & .thSort {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        &:hover {
+          color: $purple-color;
+          .thSort__name {
+            color: $purple-color;
+            &.isActive {
+              color: $purple-color;
+              font-weight: bold;
+            }
+          }
+          .thSort__icon {
+            &::before {
+              border-bottom: 3px solid $purple-color;
+            }
+            &.asc {
+              &::before {
+                border-bottom: 3px solid $purple-color;
+              }
+            }
+            &::after {
+              border-top: 3px solid $purple-color;
+            }
+            &.desc {
+              &::after {
+                border-top: 3px solid $purple-color;
+              }
+            }
+          }
+        }
+        &__name {
+          align-items: center;
+          display: flex;
+          padding-left: 7px;
+          &.isActive {
+            color: $purple-color;
+            font-weight: bold;
+          }
+        }
+        &__icon {
+          position: relative;
+          width: 8px;
+          margin-left: 3px;
+          &::before {
+            border-bottom: 3px solid #FFF;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            content: '';
+            height: 0;
+            position: absolute;
+            top: 35%;
+            transform: translateY(-50%);
+            transition: border .1s ease;
+            width: 0;
+          }
+          &.asc {
+            &::before {
+              border-bottom: 3px solid $purple-color;
+            }
+          }
+          &::after {
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            border-top: 3px solid #FFF;
+            content: '';
+            height: 0;
+            position: absolute;
+            top: 65%;
+            transform: translateY(-50%);
+            transition: border .1s ease;
+            width: 0;
+          }
+          &.desc {
+            &::after {
+              border-top: 3px solid $purple-color;
+            }
+          }
+        }
       }
     }
   }
@@ -137,7 +219,7 @@
     }
 
     th[scope="row"] {
-      background-color: #17c788;
+      background-color: $green-color;
       color: white;
       border-bottom: 1px solid #E2E9EE;
 

@@ -9,7 +9,7 @@
             :value="filter.name"
             :checked="filter.isActive"
             :disabled="filter.disabled"
-            v-on:change="filterChange(FilterType.USERS_FILTERS_GENDER_KEY, filter.name)">
+            v-on:change="handleFilterChange(FilterType.USERS_FILTERS_GENDER_KEY, filter.name)">
           <span class="filterItem__option__name" :class="{ filterItem__option__name_disabled: filter.disabled }">
             {{filter.name}} ({{filter.usersCount}})
           </span>
@@ -25,7 +25,7 @@
             :value="filter.name"
             :checked="filter.isActive"
             :disabled="filter.disabled"
-            v-on:change="filterChange(FilterType.USERS_FILTERS_DEPARTMENT_KEY, filter.name)">
+            v-on:change="handleFilterChange(FilterType.USERS_FILTERS_DEPARTMENT_KEY, filter.name)">
           <span class="filterItem__option__name" :class="{ filterItem__option__name_disabled: filter.disabled }">
             {{filter.name}} ({{filter.usersCount}})
           </span>
@@ -41,7 +41,7 @@
             :value="filter.name"
             :checked="filter.isActive"
             :disabled="filter.disabled"
-            v-on:change="filterChange(FilterType.USERS_FILTERS_CITY_KEY, filter.name)">
+            v-on:change="handleFilterChange(FilterType.USERS_FILTERS_CITY_KEY, filter.name)">
           <span class="filterItem__option__name" :class="{ filterItem__option__name_disabled: filter.disabled }">
             {{filter.name}} ({{filter.usersCount}})
           </span>
@@ -54,7 +54,7 @@
 <script lang="ts">
   import { computed } from 'vue'
   import { useUserStore } from "@/stores/users";
-  import { FilterType, ActiveFiltersValues } from "@/models/filter.model";
+  import { FilterType } from "@/models/filter.model";
 
   export default {
     setup () {
@@ -72,11 +72,17 @@
         return userStore.getUsersFiltersCityOptions
       })
 
-      const filterChange = (filterType: keyof ActiveFiltersValues, value: string) => {
-        userStore.filterChange(filterType, value);
+      const handleFilterChange = (filterType: FilterType, value: string) => {
+        userStore.doFilterUsers(filterType, value);
       }
 
-      return { filtersGenderOptions, filtersDepartmentOptions, filtersCityOptions, filterChange, FilterType }
+      return {
+        filtersGenderOptions,
+        filtersDepartmentOptions,
+        filtersCityOptions,
+        handleFilterChange,
+        FilterType
+      }
     }
   }
 </script>
